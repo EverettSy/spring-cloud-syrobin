@@ -1,0 +1,4 @@
+# AutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.syrobin.cloud.webmvc.auto.OpenFeignAutoConfiguration,\
+com.syrobin.cloud.webmvc.auto.UndertowAutoConfiguration
