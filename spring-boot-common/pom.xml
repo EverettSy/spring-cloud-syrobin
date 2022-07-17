@@ -7,6 +7,7 @@
         <artifactId>spring-cloud-syrobin</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
+
     <!--使用 spring 与 spring boot 框架的公共依赖，一般自己编写的公共 spring-boot-starter 依赖这个-->
     <artifactId>spring-boot-common</artifactId>
     <packaging>pom</packaging>
@@ -14,7 +15,7 @@
     <properties>
         <commons-collections4.version>4.4</commons-collections4.version>
         <commons-text.version>1.9</commons-text.version>
-        <fastjson.version>2.0.3</fastjson.version>
+        <fastjson.version>1.2.75</fastjson.version>
         <jaxb.version>2.3.1</jaxb.version>
         <activation.version>1.1.1</activation.version>
         <transmittable-thread-local.version>2.12.6</transmittable-thread-local.version>
