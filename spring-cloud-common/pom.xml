@@ -17,6 +17,7 @@
             <groupId>com.syrobin.cloud</groupId>
             <artifactId>spring-boot-common</artifactId>
             <version>${project.version}</version>
+            <type>pom</type>
         </dependency>
         <!--启用 Spring Cloud 的 Bootstrap Context-->
         <dependency>
@@ -42,6 +43,21 @@
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
         </dependency>
     </dependencies>
 
