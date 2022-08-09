@@ -1,6 +1,7 @@
 package com.syrobin.cloud.webmvc.undertow;
 
 import io.undertow.UndertowOptions;
+import io.undertow.attribute.ResponseTimeAttribute;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.web.embedded.undertow.ConfigurableUndertowWebServerFactory;
@@ -36,6 +37,13 @@ public class DefaultWebServerFactoryCustomizer implements WebServerFactoryCustom
         if (StringUtils.isBlank(pattern)) {
             return false;
         }
-        return pattern.contains("%D") || pattern.contains("%T");
+        //判断accesslog 是否配置了查看响应时间
+        //目前只有 %D 和 %T 这两个占位符和响应时间有关，通过这个判断
+        return pattern.contains("%D")
+                || pattern.contains("%T")
+                || pattern.contains(ResponseTimeAttribute.RESPONSE_TIME_MICROS)
+                || pattern.contains(ResponseTimeAttribute.RESPONSE_TIME_MILLIS)
+                || pattern.contains(ResponseTimeAttribute.RESPONSE_TIME_MILLIS_SHORT)
+                || pattern.contains(ResponseTimeAttribute.RESPONSE_TIME_SECONDS_SHORT);
     }
 }

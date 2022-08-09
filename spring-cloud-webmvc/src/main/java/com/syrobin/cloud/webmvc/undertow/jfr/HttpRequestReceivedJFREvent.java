@@ -10,7 +10,7 @@ import javax.servlet.ServletRequest;
 /**
  * @author syrobin
  * @version v1.0
- * @description:
+ * @description: Http请求收到JFR事件
  * @date 2022-07-13 21:08
  */
 @Category({"Http Request"})

@@ -14,7 +14,7 @@ import java.util.Enumeration;
 /**
  * @author syrobin
  * @version v1.0
- * @description:
+ * @description: Http请求JFR事件
  * @date 2022-07-13 17:18
  */
 @Category({"Http Request"})
