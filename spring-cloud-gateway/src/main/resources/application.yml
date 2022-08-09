@@ -1,0 +1,17 @@
+server:
+  port: 8181
+spring:
+  application:
+    name: apiGateway
+  cloud:
+    gateway:
+      httpclient:
+        connect-timeout: 500
+        response-timeout: 60000
+      routes:
+        - id: first_route
+          uri: http://httpbin.org
+          predicates:
+            - Path=/httpbin/**
+          filters:
+            - StripPrefix=1
