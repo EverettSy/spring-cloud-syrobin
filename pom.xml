@@ -17,6 +17,8 @@
         <module>spring-boot-common</module>
         <module>spring-cloud-common</module>
         <module>spring-cloud-webmvc</module>
+        <module>spring-cloud-eureka-server</module>
+        <module>spring-cloud-gateway</module>
     </modules>
 
     <properties>
