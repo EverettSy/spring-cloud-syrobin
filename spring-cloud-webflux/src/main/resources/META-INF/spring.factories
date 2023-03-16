@@ -1,0 +1,9 @@
+# AutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.syrobin.cloud.webflux.auto.WebClientAutoConfiguration
+
+# WebFlux
+
+# WebFlux
+
+# WebFlux

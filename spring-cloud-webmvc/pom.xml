@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>com.syrobin.cloud</groupId>
-            <artifactId>spring-cloud-common</artifactId>
+            <artifactId>spring-cloud-commons</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

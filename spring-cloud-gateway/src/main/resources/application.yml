@@ -1,5 +1,5 @@
 server:
-  port: 8181
+  port: 8215
 spring:
   application:
     name: apiGateway
@@ -7,11 +7,51 @@ spring:
     gateway:
       httpclient:
         connect-timeout: 500
+        # 网关转发其他微服务的HTTP 响应超时为 6000ms
         response-timeout: 60000
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
       routes:
-        - id: first_route
-          uri: http://httpbin.org
+        - id: service-provider
+          # lb代表从注册中心获取服务，且已负载均衡方式转发
+          uri: lb://service-provider
+          #路由条件，当请求路径匹配此条件时，才会转发到服务提供者
           predicates:
-            - Path=/httpbin/**
+            - Path=/service-provider/**
+          #过滤规则。 StripPrefix=1标识去掉url的第一个前缀，即去掉/service-provider
           filters:
             - StripPrefix=1
+        - id: service-consumer
+          # lb代表从注册中心获取服务，且已负载均衡方式转发
+          uri: lb://service-consumer
+          #路由条件，当请求路径匹配此条件时，才会转发到服务提供者
+          predicates:
+            - Path=/service-consumer/**
+          #过滤规则。 StripPrefix=1标识去掉url的第一个前缀，用后面的内容拼接到uri后面
+          filters:
+            - StripPrefix=1
+
+eureka:
+  client:
+    service-url:
+      # 默认eureka集群,这里必须是defaultZone，不能用-替换大写，与其他的配置不一样，因为实在EurekaClientConfigBean里面写死的
+      defaultZone: 'http://127.0.0.1:8211/eureka/,http://127.0.0.1:8212/eureka/'
+    # eureka client 刷新本地缓存时间 默认30秒
+    registry-fetch-interval-seconds: 5
+  instance:
+    #个性化的实例id，包括 ip:微服务名称:端口
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
+    # app名称，不填写在 Spring-cloud-netflix 体系下默认就是 spring.application.name
+    appname: ${spring.application.name}
+    #注册到 eureka 上面供其他实例访问的地址使用 ip 进行注册，其他实例会通过 ip 进行访问
+    prefer-ip-address: true
+    # 服务过期时间配置,超过这个时间没有接收到心跳EurekaServer就会将这个实例剔除
+    # 这个配置一般为服务刷新时间配置的三倍
+    lease-expiration-duration-in-seconds: 15
+    #服务刷新时间配置，每隔这个时间会主动心跳一次
+    #默认30s
+    lease-renewal-interval-in-seconds: 5
+    metadata-map:
+      zone: zone1

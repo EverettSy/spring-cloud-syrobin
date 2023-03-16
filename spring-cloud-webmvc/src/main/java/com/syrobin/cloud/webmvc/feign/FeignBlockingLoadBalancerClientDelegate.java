@@ -8,6 +8,7 @@ import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerProperties;
 import org.springframework.cloud.loadbalancer.support.LoadBalancerClientFactory;
 import org.springframework.cloud.openfeign.loadbalancer.FeignBlockingLoadBalancerClient;
+import org.springframework.cloud.openfeign.loadbalancer.FeignBlockingLoadBalancerClientExtend;
 
 import java.io.IOException;
 
@@ -24,7 +25,7 @@ import java.io.IOException;
  */
 public class FeignBlockingLoadBalancerClientDelegate implements Client {
 
-    private FeignBlockingLoadBalancerClient feignBlockingLoadBalancerClient;
+    private FeignBlockingLoadBalancerClientExtend feignBlockingLoadBalancerClient;
 
     private final Client delegate;
     private final ObjectProvider<LoadBalancerClient> loadBalancerClientProvider;
@@ -47,7 +48,7 @@ public class FeignBlockingLoadBalancerClientDelegate implements Client {
         if (feignBlockingLoadBalancerClient == null) {
             synchronized (this) {
                 if (feignBlockingLoadBalancerClient == null) {
-                    feignBlockingLoadBalancerClient = new FeignBlockingLoadBalancerClient(
+                    feignBlockingLoadBalancerClient = new FeignBlockingLoadBalancerClientExtend(
                             this.delegate,
                             this.loadBalancerClientProvider.getIfAvailable(),
                             this.properties,

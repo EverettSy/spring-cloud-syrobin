@@ -1,0 +1,5 @@
+# AutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.syrobin.cloud.commons.auto.LoadBalancerAutoConfiguration,\
+com.syrobin.cloud.commons.auto.Log4j2AutoConfiguration,\
+com.syrobin.cloud.commons.auto.SchedulingAutoConfiguration
